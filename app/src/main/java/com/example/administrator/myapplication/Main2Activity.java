@@ -1,5 +1,6 @@
 package com.example.administrator.myapplication;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,7 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +24,7 @@ public class Main2Activity extends AppCompatActivity {
   RecyclerView mRecyclerView;
     private List<String> mDatas;
     private HomeAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +32,7 @@ public class Main2Activity extends AppCompatActivity {
         ButterKnife.bind(this);
         initData();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(mAdapter = new HomeAdapter());
+        mRecyclerView.setAdapter(mAdapter = new HomeAdapter(this));
 
     }
     protected void initData()
@@ -40,6 +45,10 @@ public class Main2Activity extends AppCompatActivity {
     }
     class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder>
     {
+       Context con;
+        public HomeAdapter(Context context){
+            this.con=context;
+        }
 
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
@@ -54,6 +63,8 @@ public class Main2Activity extends AppCompatActivity {
         public void onBindViewHolder(MyViewHolder holder, int position)
         {
             holder.tv.setText(mDatas.get(position));
+            Picasso.with(con).load(MConstant.imgUrl).into(holder.img);
+
         }
 
         @Override
@@ -66,11 +77,12 @@ public class Main2Activity extends AppCompatActivity {
         {
 
             TextView tv;
-
+            ImageView img;
             public MyViewHolder(View view)
             {
                 super(view);
                 tv = (TextView) view.findViewById(R.id.id_num);
+                img = (ImageView) view.findViewById(R.id.m_imageview);
             }
         }
     }
