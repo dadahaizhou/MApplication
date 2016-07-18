@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.administrator.myapplication">
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permissio android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,7 +21,24 @@
             </intent-filter>
         </activity>
         <activity android:name=".Main2Activity" />
-        <activity android:name=".MCircleViewActivity"></activity>
+        <activity android:name=".MCircleViewActivity" />
+        <activity
+            android:name=".photoplay.PlayPhotoActivity"
+            android:theme="@style/FullSreenStyle" />
+
+        <service
+            android:name=".photoplay.PlayService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <activity
+            android:name=".photoplay.MPhotoListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".photoplay.SettingActivity"
+            android:label="@string/title_activity_main3"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".LargeBitmapActivity"></activity>
     </application>
 
 </manifest>

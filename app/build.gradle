@@ -3,6 +3,9 @@ apply plugin: 'com.neenbedankt.android-apt'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.0"
+    aaptOptions.cruncherEnabled = false
+
+    aaptOptions.useNewCruncher = false
 
     defaultConfig {
         applicationId "com.example.administrator.myapplication"
@@ -22,9 +25,13 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
+    apt 'com.jakewharton:butterknife-compiler:8.0.1'
+
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.jakewharton:butterknife:8.0.1'
-    apt 'com.jakewharton:butterknife-compiler:8.0.1'
     compile 'com.github.liuguangqiang.SuperRecyclerView:super-recyclerview:0.1.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.slider:library:1.1.5@aar'
+    compile 'com.android.support:design:24.0.0'
 }

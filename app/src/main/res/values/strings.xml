@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="title_activity_main3">Main3Activity</string>
+
+    <string name="menu_search">search</string>
+    <string name="menu_notifications">notifications</string>
+    <string name="menu_setting">setting</string>
+
+
 </resources>
