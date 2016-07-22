@@ -3,10 +3,12 @@ package com.example.administrator.myapplication.photoplay;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +31,7 @@ import com.example.administrator.myapplication.photoplay.util.SharePreferenceUti
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -91,6 +94,7 @@ public class SettingActivity extends AppCompatActivity {
        new Thread(new Runnable() {
            @Override
            public void run() {
+               scanAllAudioFiles();
                if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                    String path0 = Environment.getExternalStorageDirectory().getAbsolutePath();
                    Log.i("settingAct","root path0::"+path0);
@@ -179,4 +183,46 @@ public class SettingActivity extends AppCompatActivity {
         }
 
     }
+
+
+    public ArrayList<HashMap<String, Object>> scanAllAudioFiles(){
+//生成动态数组，并且转载数据
+        ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();
+
+//查询媒体数据库
+        Cursor cursor = getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null, null, null, MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
+//遍历媒体数据库
+        if(cursor.moveToFirst()){
+
+            while (!cursor.isAfterLast()) {
+
+                //歌曲编号
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
+                //歌曲标题
+                String tilte = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE));
+                //歌曲的专辑名：MediaStore.Audio.Media.ALBUM
+                String album = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM));
+                //歌曲的歌手名： MediaStore.Audio.Media.ARTIST
+                String artist = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST));
+                //歌曲文件的路径 ：MediaStore.Audio.Media.DATA
+                String url = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA));
+                //歌曲的总播放时长 ：MediaStore.Audio.Media.DURATION
+                int duration = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION));
+                //歌曲文件的大小 ：MediaStore.Audio.Media.SIZE
+                Long size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE));
+                Log.i("settingAct","scanAllAudioFiles foldername::"+url);
+                if(size>1024*800){//大于800K
+                    HashMap<String, Object> map = new HashMap<String, Object>();
+                    map.put("musicId", id);
+                    map.put("musicTitle", tilte);
+                    map.put("musicFileUrl", url);
+                    map.put("music_file_name", tilte);
+                    mylist.add(map);
+                }
+                cursor.moveToNext();
+            }
+        }
+        return mylist;
+    }
+
 }
