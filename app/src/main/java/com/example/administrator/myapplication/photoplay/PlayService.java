@@ -133,7 +133,11 @@ public class PlayService extends Service {
        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
            String path0=Environment.getExternalStorageDirectory().getAbsolutePath();
            Log.d("service", "service initData path0:"+path0+" root:"+root);
-           File f=new File(path0+root);
+           String tempath=root;
+           if(!root.contains(path0)){
+               tempath=path0+root;
+           }
+           File f=new File(tempath);
            if(f.exists()&&f.isDirectory()){
                for(int i=0;i<f.listFiles().length;i++){
                    File f0=f.listFiles()[i];

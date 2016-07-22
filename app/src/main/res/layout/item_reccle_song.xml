@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:id="@+id/item_song_content">
+
+        <ImageView
+            android:id="@+id/group_image"
+            android:background="@drawable/albums_bg"
+            android:src="@drawable/friends_sends_pictures_no"
+            android:layout_marginRight="10dp"
+            android:scaleType="centerInside"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/group_image"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:text="name"
+            android:layout_gravity="bottom|center_horizontal" />
+        <TextView
+            android:layout_below="@+id/name"
+            android:id="@+id/count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/group_image"
+            android:text="1首"
+            android:gravity="center_vertical"
+            android:layout_alignBottom="@+id/group_image"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_below="@+id/name"
+            android:id="@+id/spath"
+            android:layout_alignBottom="@+id/count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="middle"
+            android:layout_toRightOf="@+id/count"
+            android:text="/mnt.sdk"
+            android:gravity="center_vertical"
+            android:textSize="10sp" />
+
+
+</RelativeLayout>
