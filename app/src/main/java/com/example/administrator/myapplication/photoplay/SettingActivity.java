@@ -210,7 +210,7 @@ public class SettingActivity extends AppCompatActivity {
                 int duration = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION));
                 //歌曲文件的大小 ：MediaStore.Audio.Media.SIZE
                 Long size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE));
-                Log.i("settingAct","scanAllAudioFiles foldername::"+url);
+                Log.i("settingAct","scanAllAudioFiles url::"+url);
                 if(size>1024*800){//大于800K
                     HashMap<String, Object> map = new HashMap<String, Object>();
                     map.put("musicId", id);
