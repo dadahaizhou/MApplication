@@ -58,7 +58,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.MyViewHolder> 
         final String path=photo.getTopImagePath();
         Log.i("song","click path:"+path);
 
-        //Picasso.with(context).load(url).into(holder.img);
+
 
         holder.tv_path.setText(""+photo.getTopImagePath());
         holder.tv_count.setText(photo.getImageCounts()+"首");
