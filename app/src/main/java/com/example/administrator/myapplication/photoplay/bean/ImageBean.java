@@ -35,4 +35,7 @@ public class ImageBean {
     public void setImageCounts(int imageCounts) {
         this.imageCounts = imageCounts;
     }
+    public void ImageCountsIncrease() {
+        this.imageCounts++;
+    }
 }

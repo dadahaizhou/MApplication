@@ -33,7 +33,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import butterknife.BindView;
@@ -100,7 +102,13 @@ public class SettingActivity extends AppCompatActivity {
                    Log.i("settingAct","root path0::"+path0);
                    File f=Environment.getExternalStorageDirectory();
                    hd.removeMessages(2);
-                   fileSearch(f);
+                  // fileSearch(f);
+                   HashMap<String, ImageBean> map= scanAllAudioFiles();
+                   Iterator<Map.Entry<String, ImageBean>> iter=map.entrySet().iterator();
+                   while (iter.hasNext()){
+                      Map.Entry<String,ImageBean> entry= iter.next();
+                       dataList.add(entry.getValue());
+                   }
                    hd.sendEmptyMessage(1);
 
 
@@ -161,7 +169,7 @@ public class SettingActivity extends AppCompatActivity {
     }
    void fileSearch(File f){
         if(f!=null&&f.isDirectory()){
-        Log.i("settingAct","fileSearch foldername:"+f.getAbsolutePath());
+        //Log.i("settingAct","fileSearch foldername:"+f.getAbsolutePath());
          File[] fileArr=  f.listFiles();
             int  count=0;
             for (File f0: fileArr ){
@@ -173,6 +181,7 @@ public class SettingActivity extends AppCompatActivity {
                 }
             }
             if(count>0){
+                Log.i("settingAct","fileSearch foldername:"+f.getAbsolutePath());
                 ImageBean ib=new ImageBean();
                 ib.setImageCounts(count);
                 ib.setFolderName(f.getName());
@@ -185,9 +194,9 @@ public class SettingActivity extends AppCompatActivity {
     }
 
 
-    public ArrayList<HashMap<String, Object>> scanAllAudioFiles(){
+    public HashMap<String, ImageBean> scanAllAudioFiles(){
 //生成动态数组，并且转载数据
-        ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();
+        HashMap<String, ImageBean> mylist = new HashMap<String, ImageBean>();
 
 //查询媒体数据库
         Cursor cursor = getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null, null, null, MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
@@ -210,15 +219,28 @@ public class SettingActivity extends AppCompatActivity {
                 int duration = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION));
                 //歌曲文件的大小 ：MediaStore.Audio.Media.SIZE
                 Long size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE));
-                Log.i("settingAct","scanAllAudioFiles url::"+url);
-                if(size>1024*800){//大于800K
-                    HashMap<String, Object> map = new HashMap<String, Object>();
-                    map.put("musicId", id);
-                    map.put("musicTitle", tilte);
-                    map.put("musicFileUrl", url);
-                    map.put("music_file_name", tilte);
-                    mylist.add(map);
+//                if(size>1024*800){//大于800K
+//                    HashMap<String, Object> map = new HashMap<String, Object>();
+//                    map.put("musicId", id);
+//                    map.put("musicTitle", tilte);
+//                    map.put("musicFileUrl", url);
+//                    map.put("music_file_name", tilte);
+//                    mylist.add(map);
+//                }
+                String folderurl=url.substring(0,url.lastIndexOf("/"));
+                if(url.toLowerCase().endsWith(".mp3")) {
+                    if (!mylist.containsKey(folderurl)) {
+                        ImageBean ib = new ImageBean();
+                        ib.setImageCounts(1);
+                        ib.setFolderName(folderurl.substring(folderurl.lastIndexOf("/")));
+                        ib.setTopImagePath(folderurl);
+                        mylist.put(folderurl, ib);
+                    } else {
+                        mylist.get(folderurl).ImageCountsIncrease();
+                    }
                 }
+                Log.i("settingAct","scanAllAudioFiles url::"+url+"\n folderurl:"+folderurl);
+                //Log.i("settingAct","scanAllAudioFiles  folderurl:"+folderurl);
                 cursor.moveToNext();
             }
         }
