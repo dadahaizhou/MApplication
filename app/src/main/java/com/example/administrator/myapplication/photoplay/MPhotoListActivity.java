@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
@@ -15,6 +16,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +26,8 @@ import android.widget.Toast;
 import com.example.administrator.myapplication.R;
 import com.example.administrator.myapplication.photoplay.adapter.PhotoAdapter;
 import com.example.administrator.myapplication.photoplay.bean.ImageBean;
+import com.example.administrator.myapplication.photoplay.util.FileUtils;
+import com.example.administrator.myapplication.photoplay.util.SharePreferenceUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -65,6 +69,7 @@ public class MPhotoListActivity extends AppCompatActivity {
 
    void initData(){
            getImages();
+       initLocalMusicFolderList();
     }
   void  setMToolBar(){
       toolbar.setTitle("选择相册");
@@ -217,5 +222,26 @@ public class MPhotoListActivity extends AppCompatActivity {
       });
       mRecyclerView.setAdapter(mAdapter);
   }
+    public void initLocalMusicFolderList(){
+       String path= SharePreferenceUtil.getPrefString(con, "bgmusic", "");
+        Log.i("MPhotoListActivity"," initLocalMusicFolderList foldername::"+path);
+        if(!TextUtils.isEmpty(path)) return;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, ImageBean> folders=  FileUtils.scanAllAudioFiles(con);
+                Iterator<Map.Entry<String, ImageBean>> iter=folders.entrySet().iterator();
+                while (iter.hasNext()){
+                    Map.Entry<String, ImageBean> entry=iter.next();
+                     String path= entry.getValue().getTopImagePath();
+                    Log.i("MPhotoListActivity","thread initLocalMusicFolderList foldername::"+path);
+                    if (path != null && !path.isEmpty()) {
+                        SharePreferenceUtil.setPrefString(con, "bgmusic", path);
+                        break;
+                    }
+                }
 
+            }
+        }).start();
+    }
 }
