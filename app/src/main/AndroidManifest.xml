@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.administrator.myapplication">
+    package="com.example.zhou.myapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -13,32 +13,32 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.zhou.myapplication.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Main2Activity" />
-        <activity android:name=".MCircleViewActivity" />
+        <activity android:name="com.example.zhou.myapplication.Main2Activity" />
+        <activity android:name="com.example.zhou.myapplication.MCircleViewActivity" />
         <activity
-            android:name=".photoplay.PlayPhotoActivity"
+            android:name="com.example.zhou.myapplication.photoplay.PlayPhotoActivity"
             android:theme="@style/FullSreenStyle" />
 
         <service
-            android:name=".photoplay.PlayService"
+            android:name="com.example.zhou.myapplication.photoplay.PlayService"
             android:enabled="true"
             android:exported="false" />
 
         <activity
-            android:name=".photoplay.MPhotoListActivity"
+            android:name="com.example.zhou.myapplication.photoplay.MPhotoListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".photoplay.SettingActivity"
+            android:name="com.example.zhou.myapplication.photoplay.SettingActivity"
             android:label="@string/title_activity_main3"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LargeBitmapActivity"></activity>
+        <activity android:name="com.example.zhou.myapplication.LargeBitmapActivity"></activity>
     </application>
 
 </manifest>

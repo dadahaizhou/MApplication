@@ -7,7 +7,7 @@
     android:layout_marginBottom="0dp"
     android:background="@color/black"
     android:fitsSystemWindows="true"
-    tools:context="com.example.administrator.myapplication.photoplay.PlayPhotoActivity">
+    tools:context="com.example.zhou.myapplication.photoplay.PlayPhotoActivity">
     <com.daimajia.slider.library.SliderLayout
         android:id="@+id/slider"
         android:layout_width="wrap_content"
