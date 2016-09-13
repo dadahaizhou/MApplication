@@ -34,6 +34,7 @@
         android:layout_alignRight="@+id/button0"
         android:layout_alignEnd="@+id/button0"
         android:layout_marginTop="28dp" />
+
     <Button
         android:layout_width="150dp"
         android:layout_height="wrap_content"
@@ -43,5 +44,13 @@
         android:layout_alignRight="@+id/button0"
         android:layout_alignEnd="@+id/button0"
         android:layout_marginTop="28dp" />
-
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="retrofit"
+        android:id="@+id/btn_retrofit"
+        android:layout_below="@+id/btn_playphoto"
+        android:layout_alignRight="@+id/button0"
+        android:layout_alignEnd="@+id/button0"
+        android:layout_marginTop="28dp" />
 </RelativeLayout>

@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.zhou.myapplication.photoplay.MPhotoListActivity;
+import com.example.zhou.myapplication.retrofit.RetrofitAct;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,11 +17,16 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
    @BindView(R.id.button0)
     Button btn_recycle;
+
     @BindView(R.id.button2)
     Button btn_largeimg;
 
     @BindView(R.id.btn_playphoto)
     Button btn_playphoto;
+
+    @BindView(R.id.btn_retrofit)
+    Button btn_retrofit;
+
     @BindView(R.id.main_imageview)
     ImageView img;
     @Override
@@ -45,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this,LargeBitmapActivity.class));
+            }
+        });
+        btn_retrofit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,RetrofitAct.class));
             }
         });
     }
