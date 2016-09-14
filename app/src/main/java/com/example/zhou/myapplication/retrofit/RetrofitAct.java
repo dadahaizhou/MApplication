@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.example.zhou.myapplication.R;
+import com.example.zhou.myapplication.retrofit.runnable.PostRetrofit;
+import com.example.zhou.myapplication.retrofit.runnable.QueryGETRotrofit;
 import com.example.zhou.myapplication.retrofit.runnable.StringRetroFit;
 
 import java.io.IOException;
@@ -44,7 +46,8 @@ public class RetrofitAct extends AppCompatActivity {
         super.onResume();
         executorService.execute(run_git);
         executorService.execute(new StringRetroFit());
-
+        executorService.execute(new QueryGETRotrofit());
+        executorService.execute(new PostRetrofit());
     }
 
     Runnable  run_git=new Runnable() {
