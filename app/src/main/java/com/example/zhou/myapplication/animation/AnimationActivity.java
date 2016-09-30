@@ -86,7 +86,6 @@ public class AnimationActivity extends AppCompatActivity {
                 0, 200f);
         PropertyValuesHolder pvtransY = PropertyValuesHolder.ofFloat("translationY", 1f,
                 0, 300f);
-        float shakeFactor=1;
         PropertyValuesHolder pvhRotate = PropertyValuesHolder.ofKeyframe(View.ROTATION,
                 Keyframe.ofFloat(0f, 0f),
                 Keyframe.ofFloat(0f, 360)
