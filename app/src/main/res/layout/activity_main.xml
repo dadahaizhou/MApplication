@@ -53,4 +53,15 @@
         android:layout_alignRight="@+id/button0"
         android:layout_alignEnd="@+id/button0"
         android:layout_marginTop="28dp" />
+
+    <Button
+        android:text="Animation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_retrofit"
+        android:layout_marginTop="27dp"
+        android:id="@+id/btn_animation"
+        android:layout_toRightOf="@+id/main_imageview"
+        android:layout_alignRight="@+id/btn_retrofit"
+        android:layout_alignEnd="@+id/btn_retrofit" />
 </RelativeLayout>

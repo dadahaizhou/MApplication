@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.zhou.myapplication.animation.AnimationActivity;
 import com.example.zhou.myapplication.photoplay.MPhotoListActivity;
 import com.example.zhou.myapplication.retrofit.RetrofitAct;
 
@@ -26,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.btn_retrofit)
     Button btn_retrofit;
-
+    @BindView(R.id.btn_animation)
+    Button btn_animation;
     @BindView(R.id.main_imageview)
     ImageView img;
     @Override
@@ -57,6 +59,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this,RetrofitAct.class));
+            }
+        });
+        btn_animation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,AnimationActivity.class));
             }
         });
     }

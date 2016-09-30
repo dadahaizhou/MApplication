@@ -39,7 +39,9 @@
             android:label="@string/title_activity_main3"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LargeBitmapActivity" />
-        <activity android:name=".retrofit.RetrofitAct"></activity>
+        <activity android:name=".retrofit.RetrofitAct" />
+        <activity android:name=".animation.AnimationActivity" />
+        <activity android:name=".animation.ValueAnimatorActivity"></activity>
     </application>
 
 </manifest>
