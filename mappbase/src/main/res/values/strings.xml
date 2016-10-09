@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MAppBase</string>
+
+
+    <string name="simple_view_behavior">com.lzy.app.ui.SimpleViewBehavior</string>
+    <string name="translate_up_down_behavior">com.lzy.app.ui.TranslateUpDownBehavior</string>
+</resources>
