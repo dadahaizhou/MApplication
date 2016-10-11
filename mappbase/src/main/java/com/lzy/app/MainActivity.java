@@ -3,6 +3,7 @@ package com.lzy.app;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,18 +22,21 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.OnClick;
 
+
 public class MainActivity extends BaseActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
+    @Bind(R.id.fab)
+    FloatingActionButton fab;
     private ArrayList<OkHttpModel> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initToolBar(toolbar, false, "");
+        initToolBar(toolbar, false, R.string.app_name);
 
         initData();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -43,7 +47,16 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.fab)
     public void fab(View view) {
+        view.setTranslationX(50);
+        view.setTranslationY(100);
         WebActivity.runActivity(this, "我的Github,欢迎star", "https://github.com/jeasonlzy");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fab.setTranslationX(-50);
+        fab.setTranslationY(-100);
     }
 
     private void initData() {
