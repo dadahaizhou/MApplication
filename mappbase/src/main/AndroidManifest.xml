@@ -8,14 +8,14 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
     <application
+        android:name=".GApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".GApp"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.lzy.app.MainActivity"
+            android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,15 +24,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.lzy.app.cache.CacheDemoActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:name=".cache.CacheDemoActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name="com.lzy.app.WebActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:name=".WebActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".database.TestDbActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

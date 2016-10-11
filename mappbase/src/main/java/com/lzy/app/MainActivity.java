@@ -16,6 +16,7 @@ import com.lzy.app.base.BaseActivity;
 import com.lzy.app.base.BaseRecyclerAdapter;
 import com.lzy.app.base.DividerItemDecoration;
 import com.lzy.app.cache.CacheDemoActivity;
+import com.lzy.app.database.TestDbActivity;
 
 import java.util.ArrayList;
 
@@ -209,7 +210,7 @@ public class MainActivity extends BaseActivity {
 
         @Override
         public void onClick(View v) {
-//            if (position == 1) startActivity(new Intent(MainActivity.this, RxActivity.class));
+            if (position == 1) startActivity(new Intent(MainActivity.this, TestDbActivity.class));
 //            if (position == 3) startActivity(new Intent(MainActivity.this, OkHttpActivity.class));
 //            if (position == 4) startActivity(new Intent(MainActivity.this, JsonRequestActivity.class));
 //            if (position == 5) startActivity(new Intent(MainActivity.this, FileDownloadActivity.class));
