@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import com.example.zhou.myapplication.animation.AnimationActivity;
 import com.example.zhou.myapplication.photoplay.MPhotoListActivity;
 import com.example.zhou.myapplication.retrofit.RetrofitAct;
+import com.example.zhou.myapplication.switchbutton.SwichActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         btn_largeimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,LargeBitmapActivity.class));
+                startActivity(new Intent(MainActivity.this,SwichActivity.class));
             }
         });
         btn_retrofit.setOnClickListener(new View.OnClickListener() {

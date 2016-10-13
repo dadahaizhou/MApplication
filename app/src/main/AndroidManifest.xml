@@ -20,8 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Main2Activity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Main2Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MCircleViewActivity" />
         <activity
             android:name=".photoplay.PlayPhotoActivity"
@@ -42,7 +43,8 @@
         <activity android:name=".LargeBitmapActivity" />
         <activity android:name=".retrofit.RetrofitAct" />
         <activity android:name=".animation.AnimationActivity" />
-        <activity android:name=".animation.ValueAnimatorActivity"></activity>
+        <activity android:name=".animation.ValueAnimatorActivity" />
+        <activity android:name=".switchbutton.SwichActivity"></activity>
     </application>
 
 </manifest>
