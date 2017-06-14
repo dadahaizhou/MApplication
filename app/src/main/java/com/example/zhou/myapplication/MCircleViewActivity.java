@@ -10,4 +10,7 @@ public class MCircleViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mcircle_view);
     }
+    void testGit(){
+        String tip="";
+    }
 }
