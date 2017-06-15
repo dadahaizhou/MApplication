@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="切换按钮效果实现"
+        android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaa"
         android:textSize="24sp" />
 
     <TextView
@@ -20,5 +20,5 @@
         android:layout_marginTop="10dip"
         android:text="ToggleButton实现：" />
 
-    
+
 </LinearLayout>
