@@ -68,7 +68,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,AnimationActivity.class));
             }
         });
+        directJump();
     }
-
+    void directJump(){
+        startActivity(new Intent(this, MainKotlinActivity.class));
+        finish();
+    }
 
 }
