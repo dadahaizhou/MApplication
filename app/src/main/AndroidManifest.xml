@@ -24,6 +24,7 @@
             android:name=".Main2Activity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MCircleViewActivity" />
+        <activity android:name=".MainKotlinActivity" />
         <activity
             android:name=".photoplay.PlayPhotoActivity"
             android:theme="@style/FullSreenStyle" />
