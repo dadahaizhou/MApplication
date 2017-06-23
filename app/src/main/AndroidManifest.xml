@@ -45,7 +45,12 @@
         <activity android:name=".retrofit.RetrofitAct" />
         <activity android:name=".animation.AnimationActivity" />
         <activity android:name=".animation.ValueAnimatorActivity" />
-        <activity android:name=".switchbutton.SwichActivity"></activity>
+        <activity android:name=".switchbutton.SwichActivity" />
+        <activity android:name=".kotlin.DetaiActivity" />
+        <activity
+            android:name=".kotlin.base.BaseActivity"
+            android:label="@string/title_activity_base"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

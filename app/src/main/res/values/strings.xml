@@ -5,6 +5,7 @@
     <string name="menu_search">search</string>
     <string name="menu_notifications">notifications</string>
     <string name="menu_setting">setting</string>
+    <string name="title_activity_base">BaseActivity</string>
 
 
 </resources>

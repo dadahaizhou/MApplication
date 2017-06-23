@@ -1,16 +1,27 @@
 package com.example.zhou.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import com.example.zhou.myapplication.kotlin.DetaiActivity
 import com.example.zhou.myapplication.kotlin.adapter.EmployerAdapter
+import com.example.zhou.myapplication.kotlin.adapter.EmployerAdapter.IOnItemClick
 import com.example.zhou.myapplication.kotlin.inter.IGetData
 import com.example.zhou.myapplication.kotlin.present.EmplorPresent
 import kotlinx.android.synthetic.main.activity_kt_main.*
 
-class MainKotlinActivity : AppCompatActivity() ,IGetData{
+class MainKotlinActivity : AppCompatActivity() ,IGetData,IOnItemClick{
+    override fun onItemClick(pos: Int) {
+        var emp=dataList0[pos]
+        println("onItemClick $pos $emp")
+        var intent:Intent= Intent(this,DetaiActivity::class.java)
+        intent.putExtra("emp",emp)
+        startActivity(intent)
+    }
+
     override fun onDataResult(list: List<Employer>) {
         dataList0 = list
 //        var list0: List<Employer>? = dataList0
@@ -19,26 +30,43 @@ class MainKotlinActivity : AppCompatActivity() ,IGetData{
 //                Log.i(tag, "onDataResult emp:$emp")
 //            }
 //        }
-        adapter= EmployerAdapter(dataList0,this)
+        adapter.data=dataList0
         id_recyclerView.layoutManager=layoutManager
         id_recyclerView.adapter=adapter
     }
-    var adapter:EmployerAdapter?=null
     var layoutManager:RecyclerView.LayoutManager=LinearLayoutManager(this)
-    var a = 0
+    var a =0
     var base: Int = 100
     val tag: String = MainKotlinActivity::class.simpleName!!
     var dataList0: List<Employer> = listOf()
+    var adapter:EmployerAdapter=EmployerAdapter(dataList0,this)
     var collectionTest = CollectionTest()
     var present:EmplorPresent= EmplorPresent(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kt_main)
+        initView()
+        adapter.onItemClick=this
+//        adapter.onItemClick= object:IOnItemClick{
+//            override fun onItemClick(pos:Int){
+//
+//            }
+//        }
+
+    }
+    fun initView(){
         btn_do.setOnClickListener {
             action()
+            var numArr=  CollectionTest.getNumberArr()
+            loop@  for(a in numArr){
+                println(a)
+                if(a.equals("1324567007")){
+                    continue@loop
+                }
+            }
         }
-    }
 
+    }
     fun action(): Unit {
         a++
         val result = a + base

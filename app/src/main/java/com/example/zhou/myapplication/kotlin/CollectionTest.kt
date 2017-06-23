@@ -12,10 +12,10 @@ class CollectionTest  {
         fun getEmployer():List<Employer>{
             var array= mutableListOf<Employer>()
             for(i in 1..10){
-                var emp=Employer()
+                var emp=Employer("name$i","1322345678$i")
                 emp.id=i.toString()
-                emp.name="name$i"
-                emp.number="1322345678$i"
+//                emp.name="name$i"
+//                emp.number="1322345678$i"
                 array.add(emp)
             }
             return  array
