@@ -5,8 +5,6 @@ import android.os.Bundle
 import com.example.zhou.myapplication.Employer
 import com.example.zhou.myapplication.R
 import kotlinx.android.synthetic.main.activity_detai.*
-import com.example.zhou.myapplication.kotlin.ExtendMethod.*
-import org.jetbrains.anko.toast
 
 class DetaiActivity : Activity() {
 

@@ -3,13 +3,12 @@ package com.example.zhou.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.zhou.RxJava1.MainRxActivity;
 import com.example.zhou.myapplication.animation.AnimationActivity;
 import com.example.zhou.myapplication.photoplay.MPhotoListActivity;
 import com.example.zhou.myapplication.retrofit.RetrofitAct;
@@ -73,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         directJump();
     }
     void directJump(){
-        startActivity(new Intent(this, MainKotlinActivity.class));
+        startActivity(new Intent(this, MainRxActivity.class));
         finish();
     }
 
