@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.example.zhou.RxJava1.MainRxActivity;
 import com.example.zhou.myapplication.animation.AnimationActivity;
 import com.example.zhou.myapplication.photoplay.MPhotoListActivity;
 import com.example.zhou.myapplication.retrofit.RetrofitAct;
@@ -33,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_animation;
     @BindView(R.id.main_imageview)
     ImageView img;
+    public static boolean isForeGround;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,10 +70,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         directJump();
-    }
-    void directJump(){
-        startActivity(new Intent(this, MainRxActivity.class));
-        finish();
+        setIsForeGround(true);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setIsForeGround(true);
+    }
+
+    @Override
+    protected void onDestroy() {
+        setIsForeGround(false);
+        super.onDestroy();
+    }
+
+    void directJump(){
+        //startActivity(new Intent(this, MainRxActivity.class));
+        //finish();
+    }
+
+    public static void setIsForeGround(boolean isFroeGraound) {
+        MainActivity.isForeGround = isFroeGraound;
+    }
 }

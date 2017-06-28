@@ -1,115 +1,78 @@
 package com.example.zhou.myapplication.retrofit;
 
-import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import com.example.zhou.myapplication.R;
-import com.example.zhou.myapplication.retrofit.runnable.PostRetrofit;
-import com.example.zhou.myapplication.retrofit.runnable.QueryGETRotrofit;
-import com.example.zhou.myapplication.retrofit.runnable.StringRetroFit;
+import android.widget.Toast;
 
-import java.io.IOException;
+import com.example.zhou.myapplication.R;
+import com.example.zhou.myapplication.retrofit.module.Contributor;
+import com.example.zhou.myapplication.retrofit.movie.MovieLoader;
+
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
-import android.widget.Toast;
 
 public class RetrofitAct extends AppCompatActivity {
     @BindView(R.id.progress_bar)
     ProgressBar mProgressBar;
     @BindView(R.id.tv_content)
     TextView mTvContent;
-
+    String TAG=getClass().getSimpleName();
     ExecutorService executorService = Executors.newFixedThreadPool(3);
+    String url="https://api.github.com";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_retrofit);
         ButterKnife.bind(this);
     }
+        MovieLoader mMovieLoader = new MovieLoader(url);
     @Override
     protected void onResume() {
         super.onResume();
-        executorService.execute(run_git);
-        executorService.execute(new StringRetroFit());
-        executorService.execute(new QueryGETRotrofit());
-        executorService.execute(new PostRetrofit());
+//        executorService.execute(new StringRetroFit());
+//        executorService.execute(new QueryGETRotrofit());
+//        executorService.execute(new PostRetrofit());
+        observable
+                // Run on a background thread
+                .subscribeOn(Schedulers.newThread())
+                // Be notified on the main thread
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<Contributor>>() {
+                    @Override
+                    public void accept(List<Contributor> list) throws Exception {
+                        Log.i("RetrofitAct","accept>>>>>>>>>>>>>");
+                        for (Contributor c:list) {
+                            sb.append(c);
+                            sb.append("\n");
+                            Log.i("RetrofitAct","Contributor:"+c);
+                        }
+                        setShowViewContent(true);
+                    }
+                })
+
+        ;
     }
 
-    Runnable  run_git=new Runnable() {
-        @Override
-        public void run() {
-            path_GitHub();
 
-        }
-    };
-    interface GitHub {
-        @GET("/repos/{owner}/{repo}/contributors")
-        Call<List<Contributor>> contributors(@Path("owner") String owner,
-                                               @Path("repo") String repo);
-    }
-     class Contributor {
-        //一个pojo类(Plain Ordinary Java Object）简单的Java对象-->相比javaBean更简单. GsonConverter默认的转换器
-        String login;
-        int contributions;
-        @Override
-       public String toString(){
-               return login+" contributions:"+contributions;
-        }
-    }
+
     StringBuffer sb=new StringBuffer();
-    public  void path_GitHub(){
-        sb.setLength(0);
-        String url="https://api.github.com";
-        Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        //create a damynic proxy
-        GitHub create=retrofit.create(GitHub.class);
-        /**
-         * 访问这个地址返回的是一个JsonArray,JsonArray的每一个元素都有login
-         * 和contributions这2个key和其对应的value.提取出来封装进POJO对象中.
-         */
-        Call<List<Contributor>> call=create.contributors("square", "retrofit");
-        call.enqueue(new Callback<List<Contributor>>() {
-            @Override
-            public void onResponse(Call<List<Contributor>> call, Response<List<Contributor>> response) {
-                Log.i("RetrofitAct","onResponse>>>>>>>>");
-                List<Contributor>list=response.body();
-                for (Contributor c:list) {
-                    sb.append(c);
-                    sb.append("\n");
-                    Log.d("RetrofitAct","Contributor:"+c);
-                }
-                setShowViewContent(true);
-            }
-
-            @Override
-            public void onFailure(Call<List<Contributor>> call, Throwable t) {
-                Log.i("RetrofitAct","onFailure>>>>>>>>");
-                setShowViewContent(false);
-                t.printStackTrace();
-
-            }
-        });
-
-
-    }
     void setShowViewContent(boolean isSuc){
         mProgressBar.setVisibility(View.GONE);
         if(isSuc)
@@ -118,5 +81,24 @@ public class RetrofitAct extends AppCompatActivity {
             Toast.makeText(RetrofitAct.this,"failure",Toast.LENGTH_SHORT).show();
         }
     }
+    Observable<List<Contributor>> observable = Observable.create(new ObservableOnSubscribe<List<Contributor>>() {
 
+        @Override
+        public void subscribe(final ObservableEmitter<List<Contributor>> e) throws Exception {
+            mMovieLoader.getmMovieService().contributors("square", "retrofit").enqueue(new Callback<List<Contributor>>() {
+                @Override
+                public void onResponse(Call<List<Contributor>> call, Response<List<Contributor>> response) {
+                    Log.i(TAG,"onResponse size:"+response.body().size());
+                    e.onNext(response.body());
+                    e.onComplete();
+
+                }
+
+                @Override
+                public void onFailure(Call<List<Contributor>> call, Throwable t) {
+                    Log.i(TAG,"onFailure >>>>>>>>>>");
+                }
+            });
+        }
+    });
 }
