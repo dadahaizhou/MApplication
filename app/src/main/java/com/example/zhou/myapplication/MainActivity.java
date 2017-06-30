@@ -4,10 +4,13 @@ package com.example.zhou.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.example.zhou.RxJava1.MainRxActivity;
 import com.example.zhou.myapplication.animation.AnimationActivity;
 import com.example.zhou.myapplication.photoplay.MPhotoListActivity;
 import com.example.zhou.myapplication.retrofit.RetrofitAct;
@@ -88,9 +91,17 @@ public class MainActivity extends AppCompatActivity {
     void directJump(){
         //startActivity(new Intent(this, MainRxActivity.class));
         //finish();
+        Log.i("MainActivity","app base info>>>>>>>>>>>>>");
+        Log.i("MainActivity","this is tinker patch >>>");
+        addPatchTest();
     }
 
     public static void setIsForeGround(boolean isFroeGraound) {
         MainActivity.isForeGround = isFroeGraound;
     }
+    void addPatchTest(){
+        startActivity(new Intent(this, MainRxActivity.class));
+        finish();
+    }
+
 }

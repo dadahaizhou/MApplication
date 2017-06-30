@@ -3,13 +3,20 @@ apply plugin: 'com.neenbedankt.android-apt'
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply from: 'tinkerpatch.gradle'
 android {
+    signingConfigs {
+        release {
+            keyAlias 'app123456'
+            keyPassword '123456'
+            storeFile file('F:/gitTest/MApplication/app/app.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 24
     buildToolsVersion "25.0.0"
     aaptOptions.cruncherEnabled = false
-
     aaptOptions.useNewCruncher = false
-
     defaultConfig {
         applicationId "com.example.zhou.myapplication"
         minSdkVersion 15
@@ -21,19 +28,23 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     //anko
-//    compile "org.jetbrains.anko:anko-commons:$anko_version"
+    //    compile "org.jetbrains.anko:anko-commons:$anko_version"
     // Anko SQLite
-//    compile "org.jetbrains.anko:anko-sqlite:$anko_version"
+    //    compile "org.jetbrains.anko:anko-sqlite:$anko_version"
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.jakewharton:butterknife:8.0.1'
     compile 'com.github.liuguangqiang.SuperRecyclerView:super-recyclerview:0.1.2'
@@ -49,7 +60,13 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
-
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'io.reactivex.rxjava2:rxjava:2.0.5'
+    //tinker
+    compile("com.tinkerpatch.sdk:tinkerpatch-android-sdk:${TINKERPATCH_VERSION}") {
+        changing = true
+    }
+    //若使用annotation需要单独引用,对于tinker的其他库都无需再引用
+    provided("com.tinkerpatch.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
+    compile 'com.android.support:multidex:1.0.1'
 }

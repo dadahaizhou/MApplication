@@ -1,0 +1,1 @@
+key store pwd 123456key alias app123456key pwd 123456
