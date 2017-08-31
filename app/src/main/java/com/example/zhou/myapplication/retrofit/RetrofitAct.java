@@ -12,6 +12,9 @@ import com.example.zhou.myapplication.R;
 import com.example.zhou.myapplication.retrofit.module.Contributor;
 import com.example.zhou.myapplication.retrofit.movie.MovieLoader;
 
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -101,4 +104,7 @@ public class RetrofitAct extends AppCompatActivity {
             });
         }
     });
+
+
+
 }

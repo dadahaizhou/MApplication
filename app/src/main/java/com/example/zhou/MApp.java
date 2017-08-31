@@ -41,6 +41,7 @@ public class MApp extends Application {
     public void onCreate() {
         super.onCreate();
         initTinkerPatch();
+        schedulerJobService(5000);
     }
     @Override
     public void attachBaseContext(Context base) {

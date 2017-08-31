@@ -32,15 +32,15 @@ public class MAliveService extends JobService {
         public boolean handleMessage(Message msg) {
             Toast.makeText(MAliveService.this, "MAliveService", Toast.LENGTH_SHORT).show();
             JobParameters param = (JobParameters) msg.obj;
-            jobFinished(param, true);
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+            jobFinished(param, true);
             return true;
         }
     });
 
-    void schedulerJobService(boolean isCancel, long time) {
+    private void schedulerJobService(boolean isCancel, long time) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             JobScheduler jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
             jobScheduler.cancelAll();

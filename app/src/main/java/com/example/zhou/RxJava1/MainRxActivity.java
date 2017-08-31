@@ -2,22 +2,20 @@ package com.example.zhou.RxJava1;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.zhou.myapplication.R;
 import com.example.zhou.tool.GlideUtil;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import java.util.List;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainRxActivity extends AppCompatActivity {
@@ -119,5 +117,8 @@ public class MainRxActivity extends AppCompatActivity {
             tv_content.append("\n onComplete" +Thread.currentThread().getName());
         }
     };
-
+    private void swap(List<Object> list, int i, int j){
+        Object o = list.get(i);
+        list.set(j,o);
+    }
 }
